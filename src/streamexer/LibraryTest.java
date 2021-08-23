@@ -3,6 +3,8 @@ package streamexer;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.function.Consumer;
+import java.util.function.Function;
 import java.util.stream.Stream;
 
 public class LibraryTest {
@@ -23,5 +25,12 @@ public class LibraryTest {
         collection.sorted(Comparator
                 .comparing(Book::getName))
                 .forEach(book -> System.out.println(book.getName() + "의 가격은 " + book.getPrice() + "원 입니다."));
+
+        Consumer<String> consumer = s -> System.out.println(s + " World");
+        consumer.accept("Hello");
+        Function<Book, String> name = book -> book.getName();
+        System.out.println(name.apply(new Book("테스트", 123)));
+        Function<Book, Integer> name2 = Book::getPrice;
+        System.out.println(name2.apply(new Book("테스트", 123)));
     }
 }
